@@ -1,11 +1,11 @@
-import time,sys
-import re
+#-*- coding:utf-8 -*-
+import time,sys,re
 import sqlite3 as lite
 from BeautifulSoup import BeautifulSoup
 from urllib import FancyURLopener
 componentes = []
 class Browser(FancyURLopener):
-  version = 'Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)'
+	version = 'Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)'
 def getHTML(urlBase):
 	nBrowser = Browser()
 	html = nBrowser.open(urlBase)
@@ -47,39 +47,62 @@ def outScreen(msg,case):
 	else:
 		return  warning + getTime() + ' -> '+ msg + normal
 	return 0
-def checkMotor(SITE):
-	print outScreen('Chekando motor!','white')
+def checkIfJoomla(SITE):
 	nBrowser = Browser()
-	print outScreen('Chekando Worpdress...','white')
-	cWordpress = nBrowser.open(SITE+"/wp-login.php")
-	if (cWordpress.getcode() == 200):
-		print outScreen('Posible WordPress...','green')
-	else:
-		print outScreen('Error 404 Not Found','red')
-		print
 	print outScreen('Chekando si es un Joomla... ','white')
 	cJoomla = nBrowser.open(SITE+"/administrator")
 	if (cJoomla.getcode() == 200):
 		print outScreen(SITE,'green')+' -> '+outScreen('posible Joomla!\n','yellowB')
 		print outScreen('Confirmando...','whiteB')
+		htmlCode = cJoomla.read()
+		#htmlCode = 'a href="http://www.jeoomla.org" target="_blank">jsoomla!</';
+		if htmlCode.find("joomla") > 0: # chekamos si existe "joomla" en index.php de /administrator
+			metas = BeautifulSoup(getHTML(SITE))
+			print outScreen(SITE + ' -> ','green')+outScreen('Motor Joomla confirmando!!\n','greenB')
+			
+			i = 0
+			for tag in metas.findAll('meta', content=True): # meter URLS en un ARRAY sin repetir
+				i = i +1
+				if(i > 3):
+					if (i == 4):
+						print outScreen(getTime() + ' -> ' +str(tag['content'].encode('utf-8')),'greenB')
+					else:
+						print outScreen(tag['content'].encode('utf-8'),'')
+			print
+			getInfoJoomla(SITE) # Extraemos info desde joomla
+		else:
+			print 
+			checkIfWP(SITE) # saltamos a chekar si es un WP
+
 	else:
 		print outScreen('Error 404 Not Found','red')
-		print
-		exit(1)
-	metas = BeautifulSoup(getHTML(SITE))
-	i = 0
-	for tag in metas.findAll('meta', content=True): # meter URLS en un ARRAY sin repetir
-		i = i +1
-		if(i > 3):
-			if (i == 4):
-				print outScreen(getTime() + ' -> ' +str(tag['content'].encode('utf-8')),'greenB')
-			else:
-				print outScreen(tag['content'].encode('utf-8'),'')
-	print 
+		print 
+		checkIfWP(SITE)
+	print
+
+def checkIfWP(SITE):
+	nBrowser = Browser()
+	print outScreen('Chekando Worpdress...','white')
+	cWordpress = nBrowser.open(SITE+"/wp-login.php")
+	if (cWordpress.getcode() == 200):
+		print outScreen('Posible WordPress...','green')
+		htmlCode = cWordpress.read()
+		#print htmlCode
+		if htmlCode.find("wordpress") > 0: # chekamos si existe "joomla" en index.php de /administrator
+			print outScreen(SITE + ' -> ','green')+outScreen('Motor Worpdress confirmando!!\n','greenB')
+			print 'traajamos con WP'
+		else:
+			motorDesconocido()
+
+	else:
+		print outScreen('Error 404 Not Found','red')
+		motorDesconocido()
+def motorDesconocido():
+	print 'Motor desconocido!'
+	exit(1)
 def getTime():
 	horaNow = time.asctime()
 	return horaNow[11:20]
-
 
 def checkOnDB(component,SITE):
 	try:
