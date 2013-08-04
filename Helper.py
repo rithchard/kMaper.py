@@ -188,7 +188,7 @@ def md5online(hash):
 	pre = urllib.urlencode({'md5':hash,'search':0,'action':'decrypt','a':24628722})
 	try:
 	    html = urllib2.urlopen('http://www.md5online.es/', pre, 100)	
-	    # :limegreen'>Encontrado : <b>kharen</b></span><br />
+	    # :limegreen'>Encontrado : <b>Bolivia</b></span><br />
 	    buscar = re.search(r'(Encontrado : <b>)(.+[^>])(</b></span><br />)', html.read())
 	    if buscar:
 	        return outScreen(buscar.group(2),'greenB')
@@ -200,7 +200,7 @@ def md5decryption(hash):
 	pre = urllib.urlencode({'hash':hash,'submit':'Decrypt+It'})
 	try:
 	    html = urllib2.urlopen('http://md5decryption.com/', pre, 100)	
-	    # <font size="2">Decrypted Text: </font></b><font size="2">teamo</font>
+	    # <font size="2">Decrypted Text: </font></b><font size="2">Bolivia</font>
 	    buscar = re.search(r'(Decrypted Text: </b>)(.+[^>])(</font><br/><center>)', html.read())
 	    if buscar:
 	        return outScreen(buscar.group(2),'greenB')
@@ -275,5 +275,6 @@ def empezando(SITE):
 	print
 def header():
 	print 'kMaper.py'
-	print '==================================='
+	print '====================================================================='
+
 	print
