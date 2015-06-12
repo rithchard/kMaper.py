@@ -21,6 +21,7 @@ code.google.com/p/crypto-js/wiki/License
      *
      * This is a legacy version that neglected to convert the key to little-endian.
      * This error doesn't affect the cipher's security,
+     * You can check more details at [[today-computer.com]]
      * but it does affect its compatibility with other implementations.
      */
     var RabbitLegacy = C_algo.RabbitLegacy = StreamCipher.extend({
